@@ -1,0 +1,34 @@
+{
+  "pages": [
+    {
+      "name": "88584858",
+      "displayName": "Untitled page",
+      "layout": [
+        {
+          "widget": {
+            "name": "305ef61b",
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {}
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 0,
+            "width": 8,
+            "height": 6
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+  }
+}
