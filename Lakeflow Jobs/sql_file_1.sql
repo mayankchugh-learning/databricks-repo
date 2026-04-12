@@ -1,0 +1,1 @@
+SELECT * FROM delta.`/Volumes/databricksmayank/bronze/jobvolume/raw/stores/`
