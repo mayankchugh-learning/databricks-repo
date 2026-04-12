@@ -1,0 +1,1 @@
+select parent_folder_name, folder_name from databricksmayank.bronze.lookup_table;
