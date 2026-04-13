@@ -1,39 +1,35 @@
 import dlt
+from pyspark.sql.functions import *
+
 
 # CREATE A STREAMING TABLE
 
 @dlt.table(
-    name = 'demo_stream_table'
+    name = 'sales_stg'
 )
 
-def demo_stream_table():
-    df = spark.readStream.table('databricksmayank.silver.sales_enr')
+def sales_stg():
+    df = spark.readStream.option("skipChangeCommits", "true")\
+        .table('databricksmayank.silver.sales_enr')
     return df
 
-# CREATE MATERIALIZED VIEW
+# CREATE A MAT VIEW
 
 @dlt.table(
-    name = 'demo_mat_view'
+    name = 'sales_enr'
 )
 
-def demo_mat_view():
-    df = spark.read.table('databricksmayank.silver.sales_enr')
+def sales_enr():
+    df = spark.readStream.table("sales_stg")
+    df = df.withColumn("priceAfterDiscount", col('total_amount') - col('discount'))
     return df
 
-# Temporary View (Batch)
-@dlt.view(
-    name = 'demo_temp_view'
+    # CREATE A MAT VIEW
+
+@dlt.table(
+    name = 'sales_cur'
 )
 
-def demo_temp_view():
-    df = spark.read.table('databricksmayank.silver.sales_enr')
-    return df
-
-# Temporary View (Stream)
-@dlt.view(
-    name = 'demo_stream_view'
-)
-
-def demo_stream_view():
-    df = spark.readStream.table('databricksmayank.silver.sales_enr')
+def sales_cur():
+    df = spark.readStream.table("sales_enr")
     return df
