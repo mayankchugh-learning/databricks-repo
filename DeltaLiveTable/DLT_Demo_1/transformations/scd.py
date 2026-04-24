@@ -3,9 +3,9 @@ from pyspark.sql.functions import *
 
 # STAGING TABLE
 @dlt.table(
-    name = "scd1_stg"
+    name = "scd_stg"
 )
-def scd1_stg():
+def scd_stg():
     df = spark.readStream.table("databricksmayank.bronze.source")
     return df
 
@@ -16,7 +16,7 @@ dlt.create_streaming_table(
 
 dlt.create_auto_cdc_flow(
   target = "scd1_table",
-  source = "scd1_stg",
+  source = "scd_stg",
   keys = ["product_id"],
   sequence_by = col("processDate"),
   stored_as_scd_type = 1
